@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
+
+  /* Future Agents brand palette (from design export) */
+  --color-navy: #141a74;      /* primary brand navy */
+  --color-peri: #6470c8;      /* periwinkle accent / buttons */
+  --color-peri-soft: #6671c5; /* soft periwinkle borders */
+  --color-accent: #ff4d2e;    /* orange-red accent */
+  --color-ink: #11131a;       /* headings / dark text */
+  --color-muted: #5e6472;     /* secondary text */
+  --color-page: #f7f8fb;      /* page background */
+  --color-card: #f0f2f7;      /* light card background */
+  --color-line: #d5d9e2;      /* light borders */
+  --color-line-peri: #cbcef6; /* periwinkle borders */
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Faint blueprint grid used behind the hero */
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, rgba(232, 74, 39, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(232, 74, 39, 0.06) 1px, transparent 1px);
+  background-size: 73px 72px;
+}
+
+/* Navy → bright blue gradient text used on headline accents */
+.text-gradient-blue {
+  background-image: linear-gradient(90deg, #141a74 0%, #137ceb 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hide scrollbars on horizontal carousels while keeping them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
