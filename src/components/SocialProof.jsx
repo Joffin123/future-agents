@@ -25,13 +25,13 @@ function LinkedInBadge() {
   )
 }
 
-function ArrowButton({ dir, onClick }) {
+function ArrowButton({ dir, onClick, className = "" }) {
   return (
     <button
       type="button"
       onClick={onClick}
       aria-label={dir === "left" ? "Previous posts" : "Next posts"}
-      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#0a66c2] bg-white text-[#0a66c2] shadow-sm transition-colors hover:bg-[#0a66c2] hover:text-white"
+      className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#0a66c2] bg-white text-[#0a66c2] shadow-sm transition-colors hover:bg-[#0a66c2] hover:text-white ${className}`}
     >
       <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden>
         {dir === "left" ? (
@@ -55,32 +55,37 @@ export default function SocialProof() {
     <section className="bg-[#f0f2fe] py-24">
       <Container>
         <div className="flex flex-col items-start gap-8 lg:flex-row lg:justify-between">
-          <h2 className="max-w-[845px] text-left text-4xl font-bold leading-tight text-ink sm:text-5xl lg:text-[56px]">
+          <h2 className="max-w-[900px] text-left text-4xl font-extrabold leading-[1.12] text-ink sm:text-5xl lg:text-[56px]">
             These posts were written and published by AI agents.
             <br />
             <span className="text-gradient-blue">Built by students. In class.</span>{" "}
-            <span className="rounded-[11px] bg-navy px-3 text-white">Live</span>
+            <span className="inline-block rounded-[11px] bg-navy px-3 leading-[1.15] text-white">
+              Live
+            </span>
           </h2>
-          <p className="max-w-[261px] shrink-0 border-l-[5px] border-accent pl-5 text-left text-[15.5px] font-light leading-relaxed text-ink">
+          <p className="max-w-[261px] shrink-0 border-l-[5px] border-accent pl-5 text-left text-[15.5px] font-light leading-relaxed text-ink lg:mt-3">
             Not testimonials we collected afterward. Real posts, published in real time, by agents
             students built during the session, many of whom had never automated anything before that
             morning.
           </p>
         </div>
 
-        {/* Horizontal scrolling gallery with prev/next arrows */}
-        <div className="mt-14 flex items-center gap-4">
-          <div className="hidden sm:block">
-            <ArrowButton dir="left" onClick={() => scrollBy(-1)} />
-          </div>
+        {/* Horizontal scrolling gallery. Arrows sit outside the content column on wide screens
+            (as in the design) and drop below the cards on narrower ones. */}
+        <div className="relative mt-14">
+          <ArrowButton
+            dir="left"
+            onClick={() => scrollBy(-1)}
+            className="absolute -left-[54px] top-1/2 hidden -translate-y-1/2 min-[1400px]:flex"
+          />
           <div
             ref={trackRef}
-            className="no-scrollbar flex flex-1 snap-x gap-[18px] overflow-x-auto pb-2"
+            className="no-scrollbar flex snap-x gap-[19px] overflow-x-auto px-4 pb-2"
           >
             {posts.map((p) => (
               <div
                 key={p.file}
-                className="relative w-[390px] shrink-0 snap-start overflow-hidden rounded-[18px] border border-gray-200 bg-white p-3.5 shadow-[0_5px_23px_-9px_rgba(25,29,46,0.12)]"
+                className="relative w-[390px] shrink-0 snap-start overflow-hidden rounded-[18px] border border-gray-200 bg-white p-3.5 pb-10 shadow-[0_5px_23px_-9px_rgba(25,29,46,0.12)]"
               >
                 <img
                   src={`/assets/linkedin/${p.file}.jpg`}
@@ -94,12 +99,18 @@ export default function SocialProof() {
               </div>
             ))}
           </div>
-          <div className="hidden sm:block">
+          <ArrowButton
+            dir="right"
+            onClick={() => scrollBy(1)}
+            className="absolute -right-[54px] top-1/2 hidden -translate-y-1/2 min-[1400px]:flex"
+          />
+          <div className="mt-6 flex justify-center gap-3 min-[1400px]:hidden">
+            <ArrowButton dir="left" onClick={() => scrollBy(-1)} />
             <ArrowButton dir="right" onClick={() => scrollBy(1)} />
           </div>
         </div>
 
-        <p className="mt-8 text-center text-lg font-bold text-[#62748d]">
+        <p className="mt-6 text-center text-lg font-bold text-[#62748d]">
           Swipe → every one of these was posted by an agent its author built that same day.
         </p>
       </Container>

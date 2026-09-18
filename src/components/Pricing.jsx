@@ -1,4 +1,4 @@
-import { CheckIcon, CTAButton, Emoji } from "./ui";
+import { CheckIcon, Container, CTAButton, Emoji } from "./ui";
 
 const livePassFeatures = [
   { ok: true, text: "3-hour foundation video, yours before Saturday" },
@@ -55,71 +55,76 @@ function Check({ ok }) {
   return <CheckIcon ok={ok} className="mt-0.5" />;
 }
 
+// Column template shared by the comparison table's header and body rows.
+const tableCols =
+  "grid grid-cols-[1fr_140px_160px] items-center gap-2 rounded-xl px-4 sm:grid-cols-[1fr_200px_220px] lg:grid-cols-[1fr_270px_377px]";
+
 export default function Pricing() {
   return (
-    <section id="pricing" className="bg-white px-6 py-24 lg:px-8">
-      <div className="mx-auto w-full max-w-[1248px]">
-        <h2 className="text-center text-4xl font-bold capitalize text-black sm:text-5xl">
+    <section id="pricing" className="bg-white pb-24 pt-[120px]">
+      <Container>
+        <h2 className="text-center text-4xl font-extrabold capitalize text-black sm:text-5xl lg:text-[56px]">
           Choose Your Seat
         </h2>
 
-        {/* Pricing cards */}
-        <div className="mt-16 grid items-stretch gap-6 lg:grid-cols-2">
+        {/* Pricing cards. Top padding on the Live card lines its price up with the Pro card,
+            whose header carries the "9 out of 10" badge. */}
+        <div className="mt-16 grid items-stretch gap-[27px] lg:grid-cols-[1fr_1.04fr]">
           {/* Live Pass */}
-          <div className="flex flex-col gap-5 rounded-3xl border border-line bg-card p-10">
+          <div className="flex flex-col rounded-3xl border border-line bg-card px-10 pb-14 pt-10 lg:pt-[98px]">
             <p className="text-center text-xl font-medium text-[#5e6472]">
               LIVE BOOTCAMP PASS
             </p>
-            <p className="text-center text-6xl font-bold text-ink sm:text-7xl">
+            <p className="mt-3 text-center text-6xl font-black leading-none tracking-tight text-ink sm:text-7xl lg:text-[90px]">
               ₹499 + GST
             </p>
-            <p className="text-center text-3xl text-[#5e6472] line-through">
+            <p className="mt-8 text-center text-3xl text-[#5e6472] line-through">
               ₹4,999
             </p>
-            <p className="text-base text-ink">
+            <p className="mt-8 text-lg text-ink">
               For: I'll definitely be free all Saturday and I only want the live
               session.
             </p>
-            <div className="space-y-4">
+            <div className="mt-6 space-y-[21px]">
               {livePassFeatures.map((f) => (
                 <div key={f.text} className="flex items-start gap-3">
                   <Check ok={f.ok} />
-                  <p className="text-sm font-medium text-ink">{f.text}</p>
+                  <p className="text-[15px] font-medium text-ink">{f.text}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Pro Builder */}
-          <div className="relative flex flex-col rounded-3xl border-2 border-navy bg-page p-10 shadow-[0_10px_36px_-8px_rgba(100,112,200,0.52)]">
+          <div className="relative flex flex-col rounded-3xl border-2 border-navy bg-page px-10 pb-9 pt-10 shadow-[14px_18px_44px_-10px_rgba(100,112,200,0.6)]">
             <div className="flex justify-center">
-              <span className="rounded-full bg-navy px-7 py-2 text-lg font-medium text-white">
+              <span className="rounded-full bg-navy px-6 py-1.5 text-lg font-medium text-white">
                 <Emoji name="star" size={18} className="mr-1" />9 out of 10
                 builders choose this
               </span>
             </div>
-            <p className="mt-6 text-center text-xl font-medium text-[#111edd]">
+            <p className="mt-4 text-center text-xl font-medium text-[#111edd]">
               PRO BUILDER PASS
             </p>
-            <p className="mt-4 text-center text-6xl font-bold text-ink sm:text-7xl">
+            <p className="mt-3 text-center text-6xl font-black leading-none tracking-tight text-ink sm:text-7xl lg:text-[90px]">
               ₹999 + GST
             </p>
-            <p className="mt-4 text-center text-3xl text-navy">
+            <p className="mt-8 text-center text-3xl text-navy">
               <span className="line-through">₹9,999</span> · You save ₹9,000
             </p>
-            <p className="mt-6 text-base text-ink">
+            <p className="mt-8 text-lg text-ink">
               For: I want to actually finish all 5 agents, and rewatch the parts
               I need.
             </p>
 
-            <p className="mt-6 text-xs font-semibold text-[#111edd]">
+            <p className="mt-6 text-xs font-bold text-[#111edd]">
               Everything in the Live Pass, plus:
             </p>
-            <div className="mt-4 space-y-5">
+            <div className="mt-5 space-y-5">
               {proFeatures.map((f) => (
                 <div key={f.bold} className="flex items-start gap-3">
                   <Check ok />
-                  <p className="text-sm text-ink">
+                  <p className="text-[15px] leading-snug text-ink">
                     <span className="font-bold">{f.bold}</span>
                     <span className="font-medium">{f.rest}</span>
                   </p>
@@ -127,13 +132,15 @@ export default function Pricing() {
               ))}
             </div>
 
-            <p className="mt-8 text-center text-2xl font-bold text-navy sm:text-[27px]">
+            <p className="mt-10 text-center text-2xl font-extrabold text-navy sm:text-[32px]">
               Total value: ₹9,999 You pay: ₹999
             </p>
-            <div className="mt-5">
+            <div className="mt-4">
               <CTAButton
                 variant="navy"
-                className="w-full rounded-3xl py-5 text-2xl"
+                size="none"
+                rounded="rounded-[30px]"
+                className="w-full px-8 py-6 text-2xl sm:text-[32px]"
               >
                 Join as a Pro Builder → ₹999
               </CTAButton>
@@ -142,15 +149,14 @@ export default function Pricing() {
         </div>
 
         {/* Comparison table */}
-        <div className="mt-8 rounded-[20px] border border-line bg-card p-8">
-          <h3 className="text-center text-3xl font-bold text-ink sm:text-4xl">
-            <span className="text-[39px]">₹500</span> more. This is the entire
-            difference:
+        <div className="mt-[107px] rounded-[20px] border border-line bg-card p-8">
+          <h3 className="text-center text-3xl font-extrabold text-ink sm:text-[39px]">
+            ₹500 more. This is the entire difference:
           </h3>
 
-          <div className="mt-6 overflow-x-auto">
+          <div className="mt-5 overflow-x-auto">
             <div className="min-w-[600px] space-y-2">
-              <div className="grid grid-cols-[1fr_140px_160px] items-center gap-2 rounded-xl bg-page px-4 py-3 sm:grid-cols-[1fr_200px_220px]">
+              <div className={`${tableCols} bg-page py-4`}>
                 <span />
                 <span className="text-base font-bold text-ink">
                   Live Pass ₹499
@@ -160,11 +166,8 @@ export default function Pricing() {
                 </span>
               </div>
               {comparisonRows.map((row) => (
-                <div
-                  key={row[0]}
-                  className="grid grid-cols-[1fr_140px_160px] items-center gap-2 rounded-xl bg-white px-4 py-3 sm:grid-cols-[1fr_200px_220px]"
-                >
-                  <span className="text-base text-ink">{row[0]}</span>
+                <div key={row[0]} className={`${tableCols} bg-white py-4`}>
+                  <span className="text-lg text-ink">{row[0]}</span>
                   <span className="text-sm text-[#5e6472]">
                     <Cell value={row[1]} />
                   </span>
@@ -176,19 +179,19 @@ export default function Pricing() {
             </div>
           </div>
 
-          <p className="mt-6 text-left text-xl text-ink">
+          <p className="mt-7 text-left text-xl leading-relaxed text-ink">
             Straight talk: ₹499 gets you into the room. ₹999 gets you out of it
             with all five agents actually finished, plus 30 days to rebuild
             anything you didn't catch.
           </p>
-          <p className="mt-4 text-center text-xl font-medium text-[#5e6472]">
+          <p className="mt-6 text-center text-xl font-medium text-[#5e6472]">
             <Emoji name="card" size={20} className="mr-1" />
             UPI · Credit Card · Net Banking · EMI available
           </p>
         </div>
 
         {/* Guarantee banner */}
-        <div className="relative mt-8 overflow-hidden rounded-3xl bg-[linear-gradient(115deg,#ffffff_0%,#eef0ff_60%,#cfd9ff_100%)] p-10 lg:px-20 lg:py-12">
+        <div className="relative mt-[68px] overflow-hidden rounded-3xl bg-[linear-gradient(115deg,#ffffff_0%,#eef0ff_60%,#cfd9ff_100%)] p-10 lg:px-20 lg:py-12">
           <img
             src="/assets/guarantee-bg.jpg"
             alt=""
@@ -196,21 +199,21 @@ export default function Pricing() {
             className="pointer-events-none absolute inset-0 h-full w-full object-cover"
           />
           <div className="relative">
-            <h3 className="text-4xl font-bold sm:text-5xl">
+            <h3 className="text-4xl font-extrabold sm:text-5xl">
               <span className="text-black">Decide by lunch.</span>
               <span className="text-gradient-blue"> Zero risk.</span>
             </h3>
-            <p className="mt-6 max-w-[896px] text-left text-[15px] text-[#17122b]">
+            <p className="mt-5 max-w-[896px] text-left text-[15px] leading-relaxed text-[#17122b]">
               Join live. Watch the first builds. Ask your questions. If by the
               lunch break you feel this wasn't worth your Saturday, tell us
               before the second half starts and we refund 100%. No questions. No
               form. No awkward email chain.
             </p>
-            <p className="mt-4 max-w-[896px] text-left text-[15px] text-[#17122b]">
+            <p className="mt-3 max-w-[896px] text-left text-[15px] leading-relaxed text-[#17122b]">
               We can offer this because out of 25,000+ students, almost nobody
               has ever asked.
             </p>
-            <p className="mt-6 text-left text-xl font-semibold text-[#17122b]">
+            <p className="mt-5 text-left text-[21px] font-semibold text-[#17122b]">
               Your risk on this page is{" "}
               <span className="text-gradient-blue text-[27px] font-bold">
                 ₹0
@@ -223,7 +226,7 @@ export default function Pricing() {
             </p>
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

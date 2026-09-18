@@ -1,15 +1,31 @@
 // Shared presentational primitives for the landing page.
 
+// Design content column is 1248px wide at 1440 (96px side margins). The extra
+// 48px on max-width is eaten by the horizontal padding on narrower screens.
 export function Container({ className = "", children }) {
   return (
-    <div className={`mx-auto w-full max-w-[1248px] px-6 lg:px-8 ${className}`}>
+    <div className={`mx-auto w-full max-w-[1296px] px-6 ${className}`}>
       {children}
     </div>
   )
 }
 
-// Primary pill CTA. `size` controls the padding/scale.
-export function CTAButton({ children, href = "#pricing", variant = "dark", className = "" }) {
+// Primary CTA. Sizing/radius come from `size` + `rounded` so callers can override
+// them without fighting the base classes (Tailwind doesn't dedupe conflicting utilities).
+const buttonSizes = {
+  md: "px-8 py-4 text-lg",
+  lg: "px-8 py-4 text-2xl",
+  none: "",
+}
+
+export function CTAButton({
+  children,
+  href = "#pricing",
+  variant = "dark",
+  size = "md",
+  rounded = "rounded-full",
+  className = "",
+}) {
   const variants = {
     dark: "bg-[#0a0a0a] text-white hover:bg-black",
     navy: "bg-navy text-white hover:bg-[#0f1560]",
@@ -18,7 +34,7 @@ export function CTAButton({ children, href = "#pricing", variant = "dark", class
   return (
     <a
       href={href}
-      className={`inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 text-lg font-bold shadow-lg transition-colors ${variants[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 font-bold shadow-lg transition-colors ${rounded} ${buttonSizes[size]} ${variants[variant]} ${className}`}
     >
       {children}
     </a>
@@ -28,7 +44,7 @@ export function CTAButton({ children, href = "#pricing", variant = "dark", class
 // Small section eyebrow label (e.g. "WHY NOW", "CURRICULUM").
 export function Eyebrow({ children, className = "" }) {
   return (
-    <p className={`text-center text-2xl font-bold tracking-wide text-navy ${className}`}>
+    <p className={`text-center font-bold tracking-wide text-navy ${className}`}>
       {children}
     </p>
   )

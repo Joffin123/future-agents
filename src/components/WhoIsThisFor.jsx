@@ -27,9 +27,9 @@ function AudienceCard({ title, body, flip }) {
       <div className="absolute inset-0 bg-white/70" />
 
       <div className="relative flex h-full flex-col items-center justify-center px-8 py-12 text-center sm:px-16">
-        <h3 className="flex flex-col items-center gap-1 text-2xl font-black leading-tight text-white sm:text-3xl lg:text-[40px]">
+        <h3 className="flex flex-col items-center gap-1.5 text-2xl font-extrabold leading-tight text-white sm:text-3xl lg:text-[41px]">
           {title.map((line) => (
-            <span key={line} className="bg-navy px-3 py-0.5">
+            <span key={line} className="bg-navy px-3 py-0.5 lg:px-4">
               {line}
             </span>
           ))}
@@ -70,7 +70,7 @@ export default function WhoIsThisFor() {
       />
 
       <Container className="relative">
-        <h2 className="text-center text-4xl font-bold text-ink sm:text-5xl lg:text-[56px]">
+        <h2 className="text-center text-4xl font-extrabold text-ink sm:text-5xl lg:text-[56px]">
           Who Is This For <span className="text-5xl sm:text-6xl lg:text-[75px]">?</span>
         </h2>
       </Container>

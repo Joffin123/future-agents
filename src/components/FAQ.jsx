@@ -44,7 +44,7 @@ function Item({ q, a, open, onToggle }) {
   return (
     <div
       className={`rounded-2xl border transition-colors ${
-        open ? "border-[#6671c5] bg-[#999fcd]/20" : "border-line bg-white"
+        open ? "border-[#6671c5] bg-[#e4e6f5]" : "border-line bg-white"
       }`}
     >
       <button
@@ -52,17 +52,17 @@ function Item({ q, a, open, onToggle }) {
         className="flex w-full items-start justify-between gap-6 p-6 text-left"
         aria-expanded={open}
       >
-        <span className="text-2xl font-bold text-ink">{q}</span>
+        <span className="text-2xl font-extrabold leading-tight text-ink sm:text-[27px]">{q}</span>
         <span
-          className={`mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xl font-medium ${
-            open ? "bg-[#6671c5]/20 text-ink" : "border border-line bg-card text-[#6671c5]"
+          className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xl font-medium ${
+            open ? "bg-[#6671c5]/25 text-ink" : "border border-line bg-card text-[#6671c5]"
           }`}
         >
           {open ? "–" : "+"}
         </span>
       </button>
       {open && a && (
-        <p className="max-w-[1040px] px-6 pb-6 text-left text-base text-[#5e6472]">{a}</p>
+        <p className="-mt-2 max-w-[1040px] px-6 pb-6 text-left text-base leading-relaxed text-[#5e6472]">{a}</p>
       )}
     </div>
   )
@@ -71,10 +71,10 @@ function Item({ q, a, open, onToggle }) {
 export default function FAQ() {
   const [open, setOpen] = useState(0)
   return (
-    <section id="faq" className="bg-page py-24">
+    <section id="faq" className="bg-page pb-24 pt-[110px]">
       <Container>
-        <h2 className="text-center text-4xl font-bold text-navy sm:text-5xl">FAQ</h2>
-        <div className="mt-12 space-y-3">
+        <h2 className="text-center text-4xl font-extrabold text-navy sm:text-5xl lg:text-[56px]">FAQ</h2>
+        <div className="mt-[70px] space-y-[13px]">
           {faqs.map((f, i) => (
             <Item
               key={f.q}
